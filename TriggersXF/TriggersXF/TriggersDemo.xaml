@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TriggersXF.TriggersDemo"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:triggers="clr-namespace:TriggersXF.Triggers;assembly=TriggersXF"
+    Title="Register Form">
+
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="LightBlue" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="WidthRequest" Value="150" />
+            <Setter Property="CornerRadius" Value="20" />
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="LightSkyBlue" />
+            <Style.Triggers>
+                <!--  Property Triggers  -->
+                <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                    <Setter Property="BackgroundColor" Value="BlanchedAlmond" />
+                    <Setter Property="FontSize" Value="Large" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="EntryName" Placeholder="Enter Username" />
+            <Entry
+                x:Name="EntryPassword"
+                IsPassword="True"
+                Placeholder="Enter Password" />
+            <Entry x:Name="EntryAge" Placeholder="Enter Age">
+                <Entry.Triggers>
+                    <!--  Event Triggers  -->
+                    <EventTrigger Event="TextChanged">
+                        <triggers:AgeVerificationTrigger />
+                    </EventTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Entry x:Name="EntryEmail" Placeholder="Enter Email" />
+
+            <StackLayout Orientation="Horizontal" Spacing="6">
+                <CheckBox x:Name="CheckBoxAgree" />
+                <Label Text="I Agree" VerticalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="6">
+                <Button IsEnabled="False" Text="Register">
+                    <Button.Triggers>
+                        <!--  Data Triggers  -->
+                    </Button.Triggers>
+                </Button>
+                <Button Text="Clear" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
